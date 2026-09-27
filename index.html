@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harun Kuyumculuk</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --pink:#f0bdc7;
+    --pink-deep:#dd8ea0;
+    --green:#4a6b52;
+    --green-deep:#375240;
+    --cream:#fdfaf5;
+    --cream-2:#f5eee3;
+    --ink:#231f1b;
+    --ink-soft:#746b60;
+    --gold:#b8863a;
+    --line:#e7ddcd;
+  }
+  *{box-sizing:border-box;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Poppins',"Segoe UI",Arial,sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2{
+    font-family:'Fredoka',sans-serif;
+    font-weight:700;
+    text-wrap:balance;
+    margin:0;
+    color:var(--ink);
+  }
+  h3{font-family:'Fredoka',sans-serif; font-weight:600; margin:0; color:var(--ink);}
+  h1{font-size:clamp(2.6rem,5vw + 1.2rem,4.6rem); line-height:1.02;}
+  h2{font-size:clamp(1.9rem,2.6vw + 1rem,2.6rem); line-height:1.1;}
+  h3{font-size:1.15rem;}
+  p{margin:0;}
+  a{color:inherit;}
+  img,svg{max-width:100%;}
+  .label{
+    display:inline-block; font-family:'Poppins',sans-serif; font-size:.9rem;
+    font-weight:600; margin-bottom:8px;
+  }
+  .muted{color:var(--ink-soft);}
+  .wrap{max-width:1180px; margin-inline:auto; padding-inline:clamp(20px,5vw,64px);}
+  .btn{
+    display:inline-flex; align-items:center; gap:.5em;
+    font-family:'Poppins',sans-serif; font-size:.95rem; font-weight:600;
+    padding:.9em 1.8em; border-radius:999px; border:1.5px solid transparent;
+    cursor:pointer; text-decoration:none; transition:transform .15s ease, background .15s ease, opacity .15s ease;
+  }
+  .btn:focus-visible{outline:2px solid var(--ink); outline-offset:3px;}
+  .btn-primary{background:var(--ink); color:var(--cream);}
+  .btn-primary:hover{transform:translateY(-1px); opacity:.9;}
+  .btn-onpink{background:var(--cream); color:var(--ink);}
+  .btn-onpink:hover{transform:translateY(-1px); background:#fff;}
+  .btn-ghost-onpink{background:transparent; color:var(--cream); border-color:rgba(253,250,245,.7);}
+  .btn-ghost-onpink:hover{background:rgba(253,250,245,.15);}
+
+  /* nav */
+  .nav{position:sticky; top:0; z-index:50; background:var(--cream); border-bottom:1px solid var(--line);}
+  .nav-row{display:flex; align-items:center; justify-content:space-between; padding-block:16px;}
+  .brand{display:flex; flex-direction:column; line-height:1; flex-shrink:1; min-width:0;
+    font-family:'Fredoka',sans-serif; font-weight:700; font-size:clamp(1.1rem,4vw,1.35rem);
+    text-decoration:none; color:var(--ink); white-space:nowrap;}
+  .brand small{font-family:'Poppins',sans-serif; font-size:.65rem; font-weight:500; color:var(--ink-soft); margin-top:3px; white-space:normal;}
+  @media (max-width:480px){ .brand small{display:none;} }
+  .nav-links{display:flex; align-items:center; gap:clamp(14px,2.2vw,28px); list-style:none; margin:0; padding:0;}
+  .nav-links a{font-size:.92rem; font-weight:500; text-decoration:none; color:var(--ink); border-bottom:1.5px solid transparent; padding-block:4px; transition:border-color .15s ease;}
+  .nav-links a:hover{border-color:var(--pink-deep);}
+  .nav-actions{display:flex; align-items:center; gap:12px; flex-shrink:0;}
+  .nav-toggle{display:none; position:relative; background:none; border:1.5px solid var(--ink); border-radius:999px; width:40px; height:36px; cursor:pointer; padding:0; flex-shrink:0;}
+  .nav-toggle span{position:absolute; left:10px; right:10px; height:2px; background:var(--ink); border-radius:2px;}
+  .nav-toggle span:nth-child(1){top:12px;} .nav-toggle span:nth-child(2){top:17px;} .nav-toggle span:nth-child(3){top:22px;}
+  @media (max-width:820px){
+    .nav-links{display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:flex-start; gap:0;
+      background:var(--cream); border-bottom:1px solid var(--line); padding:8px clamp(20px,5vw,64px) 18px;}
+    .nav-links.open{display:flex;}
+    .nav-links a{width:100%; padding-block:10px; border-bottom:1px solid var(--line);}
+    .nav-toggle{display:inline-flex; align-items:center; justify-content:center;}
+    .nav-actions .btn-primary-nav-only{display:none;}
+  }
+
+  /* hero */
+  .hero{background:var(--pink); padding-block:clamp(48px,7vw,80px);}
+  .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(28px,5vw,56px); align-items:center;}
+  @media (max-width:820px){ .hero-grid{grid-template-columns:1fr;} .hero-art{order:-1; max-width:340px;} }
+  .hero-copy h1{color:var(--cream);}
+  .hero-copy .lede{font-size:1.05rem; color:rgba(253,250,245,.9); max-width:44ch; margin-top:18px;}
+  .hero-actions{display:flex; flex-wrap:wrap; gap:14px; margin-top:28px;}
+  .hero-art{position:relative; aspect-ratio:1/1; max-width:400px; margin-inline:auto;
+    background:var(--cream); border-radius:28px; display:flex; align-items:center; justify-content:center;}
+  .hero-art svg.rig{width:58%; color:var(--ink);}
+  .hero-star{position:absolute; color:var(--green);}
+  .hero-star.s1{top:8%; left:10%; width:22px;}
+  .hero-star.s2{bottom:10%; right:12%; width:16px; color:var(--pink-deep);}
+  .hero-star.s3{top:14%; right:8%; width:12px; color:var(--gold);}
+
+  section{padding-block:clamp(48px,7vw,84px);}
+  .section-head{max-width:60ch; margin-bottom:clamp(28px,4vw,40px);}
+  .section-head p{margin-top:10px; font-size:1rem; color:var(--ink-soft);}
+
+  /* trust */
+  .trust-row{display:flex; flex-wrap:wrap; gap:14px 32px; padding-block:20px; border-block:1px solid var(--line); justify-content:center;}
+  .trust-item{display:flex; align-items:center; gap:9px; font-size:.92rem; font-weight:500;}
+  .trust-item .dot{width:7px; height:7px; border-radius:50%; background:var(--pink-deep); flex-shrink:0;}
+
+  /* collection */
+  .collection-grid{position:relative; display:grid; grid-template-columns:repeat(3,1fr); column-gap:28px; row-gap:36px;}
+  @media (max-width:900px){ .collection-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .collection-grid{grid-template-columns:1fr;} }
+  .plus{position:absolute; color:var(--ink-soft); opacity:.55; font-size:1.2rem; font-weight:600; pointer-events:none; transform:translate(-50%,-50%); z-index:2;}
+  .tile{aspect-ratio:1/1; border-radius:18px; display:flex; align-items:center; justify-content:center;}
+  .tile svg{width:34%; height:34%;}
+  .tile.t-pink{background:#f7dbe1; color:var(--ink);}
+  .tile.t-green{background:#dfe8e0; color:var(--green-deep);}
+  .tile.t-cream{background:var(--cream-2); color:var(--ink);}
+  .cat-name{font-family:'Fredoka',sans-serif; font-weight:600; font-size:1.05rem; margin-top:16px;}
+  .cat-desc{font-size:.88rem; color:var(--ink-soft); margin-top:6px;}
+
+  /* atelier */
+  .atelier{
+    background:var(--green); color:var(--cream);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(253,250,245,.06) 0 1px, transparent 1px 42px),
+      repeating-linear-gradient(90deg, rgba(253,250,245,.06) 0 1px, transparent 1px 42px);
+  }
+  .atelier .label{color:var(--pink);}
+  .atelier h2{color:var(--cream);}
+  .atelier-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(28px,5vw,60px); align-items:start;}
+  @media (max-width:820px){ .atelier-grid{grid-template-columns:1fr;} }
+  .atelier-copy{display:flex; flex-direction:column; gap:16px;}
+  .atelier-copy p{color:rgba(253,250,245,.85);}
+  .steps{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:0 32px;}
+  @media (max-width:560px){ .steps{grid-template-columns:1fr;} }
+  .step{display:grid; grid-template-columns:40px 1fr; gap:14px; padding-block:16px; border-top:1px solid rgba(253,250,245,.2);}
+  .step .num{font-family:'Fredoka',sans-serif; font-weight:700; font-size:1.2rem; color:var(--pink);}
+  .step h3{font-size:1rem; color:var(--cream); margin-bottom:3px;}
+  .step p{font-size:.86rem; color:rgba(253,250,245,.75);}
+
+  /* market */
+  .market-card{background:var(--cream-2); border-radius:22px; padding:clamp(24px,4vw,40px);}
+  .market-table{width:100%; border-collapse:collapse; overflow-x:auto; display:block;}
+  .market-table table{width:100%; border-collapse:collapse; min-width:480px;}
+  .market-table th,.market-table td{text-align:left; padding:12px 10px; border-bottom:1px solid var(--line); font-size:.92rem;}
+  .market-table th{color:var(--ink-soft); font-weight:600;}
+  .market-table td.num{font-variant-numeric:tabular-nums; font-family:'Fredoka',sans-serif; font-weight:600; color:var(--gold);}
+  .market-note{font-size:.82rem; color:var(--ink-soft); margin-top:16px;}
+
+  /* contact */
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,48px); align-items:start;}
+  @media (max-width:820px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:18px;}
+  .contact-list li{display:flex; gap:14px; align-items:flex-start;}
+  .contact-list svg{width:20px; height:20px; color:var(--pink-deep); flex-shrink:0; margin-top:3px;}
+  .contact-list .field-label{font-size:.8rem; font-weight:600; color:var(--ink-soft); margin-bottom:2px;}
+  .moodboard{position:relative; display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .swatch{border-radius:16px; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center;}
+  .swatch svg{width:36%; color:var(--ink);}
+  .swatch.sw1{background:var(--pink); margin-top:24px;}
+  .swatch.sw2{background:var(--cream-2);}
+  .swatch.sw3{background:#dfe8e0;}
+  .swatch.sw4{background:var(--green); margin-top:-24px;}
+  .swatch.sw4 svg{color:var(--cream);}
+  .contact-card{background:var(--cream-2); border-radius:22px; padding:clamp(22px,3vw,30px); display:flex; flex-direction:column; gap:14px; margin-top:20px;}
+  .hours-row{display:flex; justify-content:space-between; font-size:.9rem; padding-block:8px; border-top:1px solid var(--line);}
+  .hours-row:first-of-type{border-top:none;}
+
+  /* footer */
+  footer{background:var(--green); color:var(--cream); padding-top:clamp(48px,6vw,72px);}
+  .foot-top{display:grid; grid-template-columns:1.1fr .6fr .6fr 1fr; gap:32px;}
+  @media (max-width:760px){ .foot-top{grid-template-columns:1fr 1fr;} }
+  .foot-brand{font-family:'Fredoka',sans-serif; font-weight:700; font-size:1.3rem;}
+  .foot-tag{font-size:.88rem; color:rgba(253,250,245,.75); margin-top:10px; max-width:32ch;}
+  .foot-col h4{font-family:'Poppins',sans-serif; font-size:.85rem; font-weight:600; margin-bottom:14px; color:rgba(253,250,245,.6);}
+  .foot-col ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+  .foot-col a{font-size:.9rem; text-decoration:none; color:var(--cream);}
+  .foot-col a:hover{color:var(--pink);}
+  .foot-cta{background:rgba(253,250,245,.1); border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:10px;}
+  .foot-cta p{font-size:.85rem; color:rgba(253,250,245,.85);}
+  .foot-bottom{display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; padding-block:24px; margin-top:40px; border-top:1px solid rgba(253,250,245,.2); font-size:.8rem; color:rgba(253,250,245,.65);}
+  .foot-giant{font-family:'Fredoka',sans-serif; font-weight:700; color:rgba(253,250,245,.12);
+    font-size:clamp(3rem,13vw,9rem); line-height:1; text-align:center; padding-block:.2em .3em; white-space:nowrap; overflow:hidden;}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="brand" href="#anasayfa">Harun Kuyumculuk<small>Kuyum Atölyesi</small></a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#anasayfa">Anasayfa</a></li>
+        <li><a href="#koleksiyon">Koleksiyon</a></li>
+        <li><a href="#atolye">Atölye</a></li>
+        <li><a href="#piyasa">Günlük Piyasa</a></li>
+        <li><a href="#iletisim">İletişim</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-primary btn-primary-nav-only" href="https://wa.me/902328326442" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menüyü aç/kapat"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="anasayfa">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1>Altının Zanaatla Buluştuğu Yer</h1>
+        <p class="lede">Harun Kuyumculuk'ta her parça elde çizilir, ayarında dökülür, tek tek taşlanır ve garanti belgesiyle teslim edilir. Alyanstan ziynet altınına, atölyemizden vitrine.</p>
+        <div class="hero-actions">
+          <a class="btn btn-onpink" href="https://wa.me/902328326442" target="_blank" rel="noopener">WhatsApp'tan Sipariş Ver ↗</a>
+          <a class="btn btn-ghost-onpink" href="#koleksiyon">Koleksiyonu İncele</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg class="rig" viewBox="0 0 120 120" fill="none">
+          <circle cx="60" cy="76" r="26" stroke="currentColor" stroke-width="5"/>
+          <path d="M60 34 L72 54 L60 47 L48 54 Z" fill="currentColor"/>
+          <circle cx="60" cy="38" r="3" fill="currentColor"/>
+          <path d="M28 40 C22 50 24 62 32 66" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M92 40 C98 50 96 62 88 66" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </svg>
+        <svg class="hero-star s1" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+        <svg class="hero-star s2" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+        <svg class="hero-star s3" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="trust-row">
+      <div class="trust-item"><span class="dot"></span>916 &amp; 999 Ayar Garantisi</div>
+      <div class="trust-item"><span class="dot"></span>El İşçiliği Atölye Üretimi</div>
+      <div class="trust-item"><span class="dot"></span>Takas &amp; Eski Altın Değişimi</div>
+      <div class="trust-item"><span class="dot"></span>Her Parçada Garanti Belgesi</div>
+    </div>
+  </div>
+
+  <section id="koleksiyon">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="label" style="color:var(--pink-deep)">Koleksiyon</span>
+        <h2>Vitrinimizden Seçmeler</h2>
+        <p>Ayarında dökülmüş, elde işlenmiş parçalar; her kategori atölyemizde özel siparişe de açıktır.</p>
+      </div>
+      <div class="collection-grid">
+        <div>
+          <div class="tile t-pink"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><circle cx="26" cy="34" r="14"/><circle cx="40" cy="30" r="12"/></svg></div>
+          <div class="cat-name">Alyans</div>
+          <p class="cat-desc">Ömürlük birlikteliğin simgesi; 14 ve 22 ayar seçenekleriyle, içine isim ve tarih yazımı dahil.</p>
+        </div>
+        <div>
+          <div class="tile t-green"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><circle cx="32" cy="38" r="16"/><path d="M24 24 L32 10 L40 24 Z" fill="currentColor" stroke="none"/><circle cx="32" cy="18" r="4" fill="currentColor" stroke="none"/></svg></div>
+          <div class="cat-name">Yüzük</div>
+          <p class="cat-desc">Tek taş, yüzlü ve vintage kesim modeller; günlük kullanımdan özel gün tasarımlarına.</p>
+        </div>
+        <div>
+          <div class="tile t-cream"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-dasharray="1 6" stroke-linecap="round"><path d="M8 14 Q32 40 56 14"/></svg></div>
+          <div class="cat-name">Kolye &amp; Kolye Ucu</div>
+          <p class="cat-desc">İnce zincirden gösterişli modellere; harf, göz ve damla kolye ucu seçenekleriyle.</p>
+        </div>
+        <div>
+          <div class="tile t-green"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><ellipse cx="32" cy="32" rx="24" ry="14"/><path d="M14 32h4M46 32h4M20 20l3 3M44 20l-3 3M20 44l3-3M44 44l-3-3" stroke-width="2"/></ellipse></svg></div>
+          <div class="cat-name">Bilezik &amp; Künye</div>
+          <p class="cat-desc">Burma, fantazi ve isim künyeli bilezik seçenekleri; gram gram sipariş imkanıyla.</p>
+        </div>
+        <div>
+          <div class="tile t-pink"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><circle cx="32" cy="14" r="6"/><path d="M26 22 C18 34, 20 50, 32 54 C44 50, 46 34, 38 22 Z" fill="currentColor" stroke="none"/></svg></div>
+          <div class="cat-name">Küpe</div>
+          <p class="cat-desc">Günlük kullanımdan özel gün küpelerine geniş yelpaze; çift ve tekli sipariş mümkün.</p>
+        </div>
+        <div>
+          <div class="tile t-cream"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor"><circle cx="32" cy="32" r="22" stroke-width="3"/><circle cx="32" cy="32" r="14" stroke-width="1.5"/><path d="M32 24 L34 30 L40 30 L35 34 L37 40 L32 36 L27 40 L29 34 L24 30 L30 30 Z" fill="currentColor" stroke="none"/></svg></div>
+          <div class="cat-name">Ziynet Altını</div>
+          <p class="cat-desc">Çeyrek, yarım, tam ve Cumhuriyet altını; güncel ayarında, resmi darp kalitesinde.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="atelier" id="atolye">
+    <div class="wrap atelier-grid">
+      <div class="atelier-copy">
+        <span class="label">Atölye</span>
+        <h2>Çizimden Vitrine</h2>
+        <p>Her sipariş, kağıt üzerinde bir teknik çizimle başlar. Ustalarımız isteğinize göre modeli çizer, ayarını ve gramajını sizinle netleştirir, ardından dökümden cilaya kadar her aşamayı tek tek elden geçirir.</p>
+        <p>Özel tasarım, eski altın değişimi ve toplu sipariş (düğün, nişan seti) için atölyemizle doğrudan görüşebilirsiniz.</p>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="num">01</span><div><h3>Tasarım &amp; Teknik Çizim</h3><p>Talebiniz doğrultusunda parçanın ölçekli çizimi hazırlanır.</p></div></li>
+        <li class="step"><span class="num">02</span><div><h3>Döküm</h3><p>Belirlenen ayarda (14 / 18 / 22 ayar) altın veya gümüş dökülür.</p></div></li>
+        <li class="step"><span class="num">03</span><div><h3>İşçilik &amp; Taşlama</h3><p>Parça elde ve hassas makinede şekillendirilir, yüzeyi taşlanır.</p></div></li>
+        <li class="step"><span class="num">04</span><div><h3>Taş Montajı</h3><p>Varsa taşlar tek tek yuvasına oturtularak sabitlenir.</p></div></li>
+        <li class="step"><span class="num">05</span><div><h3>Cila &amp; Son Kontrol</h3><p>Parlatma yapılır; ayar ve ağırlık tartılıp mühürlenir.</p></div></li>
+        <li class="step"><span class="num">06</span><div><h3>Teslim &amp; Garanti Belgesi</h3><p>Parça, garanti belgesi ve fatura ile elden teslim edilir.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="piyasa">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="label" style="color:var(--green-deep)">Günlük Piyasa</span>
+        <h2>Örnek Fiyat Görünümü</h2>
+      </div>
+      <div class="market-card">
+        <div class="market-table">
+          <table>
+            <thead><tr><th>Ürün</th><th>Alış</th><th>Satış</th></tr></thead>
+            <tbody>
+              <tr><td>Gram Altın</td><td class="num">₺6.739,97</td><td class="num">₺6.740,80</td></tr>
+              <tr><td>Çeyrek Altın</td><td class="num">₺10.722,45</td><td class="num">₺10.967,28</td></tr>
+              <tr><td>Yarım Altın</td><td class="num">₺21.377,89</td><td class="num">₺21.934,56</td></tr>
+              <tr><td>Tam Altın</td><td class="num">₺42.889,81</td><td class="num">₺43.734,95</td></tr>
+              <tr><td>Gümüş (gram)</td><td class="num">₺101,14</td><td class="num">₺101,18</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="market-note">*27 Eylül 2026 itibarıyla doviz.com üzerinden alınan piyasa verileridir; anlık değişebilir, güncel alım-satım fiyatı için mağazamızı arayınız.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="iletisim">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="section-head">
+          <span class="label" style="color:var(--pink-deep)">İletişim</span>
+          <h2>Bize Uğrayın</h2>
+        </div>
+        <ul class="contact-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <div><div class="field-label">Adres</div><a href="https://share.google/zbtiqenaoEQxiXXKv" target="_blank" rel="noopener" style="text-decoration:underline; text-underline-offset:3px;">Örnek Mahallesi, Kuyumcular Sokak No:12<br>Merkez / [Şehir] — Haritada Gör ↗</a></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.4 2.1L8 9.9a16 16 0 006 6l1.4-1.4a2 2 0 012.1-.4c.9.3 1.8.5 2.7.6a2 2 0 011.8 2.1z"/></svg>
+            <div><div class="field-label">Telefon &amp; WhatsApp</div><a href="https://wa.me/902328326442" target="_blank" rel="noopener">0232 832 64 42</a></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            <div><div class="field-label">Çalışma Saatleri</div>Hafta içi 09:00–19:00 · Cumartesi 09:00–18:00<br>Pazar kapalı</div>
+          </li>
+        </ul>
+        <div class="contact-card">
+          <h3>Hemen Ulaşın</h3>
+          <p class="muted">Sipariş, tamir, eski altın değişimi veya özel tasarım için bize yazın — aynı gün dönüş yapalım.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:12px;">
+            <a class="btn btn-primary" href="https://wa.me/902328326442" target="_blank" rel="noopener">WhatsApp'tan Yazın</a>
+            <a class="btn" style="border-color:var(--ink);" href="tel:+902328326442">0232 832 64 42</a>
+          </div>
+          <div>
+            <div class="hours-row"><span>Alyans &amp; Nişan</span><span class="muted">Randevulu</span></div>
+            <div class="hours-row"><span>Tamir &amp; Onarım</span><span class="muted">Aynı Gün</span></div>
+            <div class="hours-row"><span>Özel Tasarım</span><span class="muted">3–7 İş Günü</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="moodboard" aria-hidden="true">
+        <div class="swatch sw1"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><circle cx="32" cy="38" r="16"/><path d="M24 24 L32 10 L40 24 Z" fill="currentColor" stroke="none"/></svg></div>
+        <div class="swatch sw2"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"><circle cx="26" cy="34" r="14"/><circle cx="40" cy="30" r="12"/></svg></div>
+        <div class="swatch sw3"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-dasharray="1 6" stroke-linecap="round"><path d="M8 14 Q32 40 56 14"/></svg></div>
+        <div class="swatch sw4"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor"><circle cx="32" cy="32" r="22" stroke-width="3"/><path d="M32 24 L34 30 L40 30 L35 34 L37 40 L32 36 L27 40 L29 34 L24 30 L30 30 Z" fill="currentColor" stroke="none"/></svg></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">Harun Kuyumculuk</div>
+        <p class="foot-tag">Ayarında dökülen, elde işlenen ve garantiyle teslim edilen altın ve gümüş takılar.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Koleksiyon</h4>
+        <ul>
+          <li><a href="#koleksiyon">Alyans</a></li>
+          <li><a href="#koleksiyon">Yüzük</a></li>
+          <li><a href="#koleksiyon">Kolye</a></li>
+          <li><a href="#koleksiyon">Bilezik</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Bilgi</h4>
+        <ul>
+          <li><a href="#atolye">Atölye</a></li>
+          <li><a href="#piyasa">Günlük Piyasa</a></li>
+          <li><a href="#iletisim">İletişim</a></li>
+        </ul>
+      </div>
+      <div class="foot-cta">
+        <h4 style="margin-bottom:0;">Hızlı iletişim</h4>
+        <p>Sorularınız için WhatsApp'tan yazın, aynı gün dönüş yapalım.</p>
+        <a class="btn btn-onpink" href="https://wa.me/902328326442" target="_blank" rel="noopener">WhatsApp'tan Yazın ↗</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> Harun Kuyumculuk — Tüm hakları saklıdır.</span>
+      <span><a href="https://wa.me/902328326442" target="_blank" rel="noopener" style="color:inherit;">0232 832 64 42</a> · <a href="https://share.google/zbtiqenaoEQxiXXKv" target="_blank" rel="noopener" style="color:inherit;">Haritada Gör ↗</a></span>
+    </div>
+  </div>
+  <div class="foot-giant">HARUN KUYUMCULUK</div>
+</footer>
+
+<script>
+  (function(){
+    var toggle = document.getElementById('navToggle');
+    var links = document.getElementById('navLinks');
+    toggle.addEventListener('click', function(){
+      var isOpen = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    links.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function placePlus(){
+      var grid = document.querySelector('.collection-grid');
+      var old = grid.querySelectorAll('.plus');
+      old.forEach(function(o){ o.remove(); });
+      var cols = window.innerWidth <= 560 ? 1 : (window.innerWidth <= 900 ? 2 : 3);
+      if (cols < 2) return;
+      var xs = cols === 3 ? [33.333, 66.666] : [50];
+      var ys = [50];
+      xs.forEach(function(x){
+        ys.forEach(function(y){
+          var s = document.createElement('span');
+          s.className = 'plus';
+          s.textContent = '+';
+          s.style.left = x + '%';
+          s.style.top = y + '%';
+          grid.appendChild(s);
+        });
+      });
+    }
+    placePlus();
+    window.addEventListener('resize', placePlus);
+  })();
+</script>
+</body>
+</html>
